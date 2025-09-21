@@ -4,7 +4,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install required development packages
 RUN apt-get install -y direnv libboost-all-dev inotify-tools zsh \
-  && apt-get remove -y cmake \
   && apt-get clean
 
 # Install zellij
@@ -17,9 +16,9 @@ RUN cd /tmp \
 
 # Install neovim
 RUN cd /tmp \
-  && curl -LO "https://github.com/neovim/neovim-releases/releases/download/v0.10.4/nvim-linux-x86_64.deb" \
-  && apt-get install -y ./nvim-linux-x86_64.deb \
-  && rm ./nvim-linux-x86_64.deb
+  && curl -LO "https://github.com/neovim/neovim-releases/releases/download/v0.11.4/nvim-linux-x86_64.tar.gz" \
+  && tar -xvf ./nvim-linux-x86_64.tar.gz --strip-components=1 -C /usr/local \
+  && rm ./nvim-linux-x86_64.tar.gz
 
 # Install a newer version of CMake
 RUN cd /tmp \
