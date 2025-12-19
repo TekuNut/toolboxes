@@ -28,9 +28,10 @@ RUN cd /tmp \
   && tar -xvf ./nvim-linux-x86_64.tar.gz --strip-components=1 -C /usr/local \
   && rm ./nvim-linux-x86_64.tar.gz
 
-# Install a newer version of CMake
-RUN cd /tmp \
-  && curl -LO "https://github.com/Kitware/CMake/releases/download/v4.1.1/cmake-4.1.1-linux-x86_64.sh" \
-  && chmod +x ./cmake-4.1.1-linux-x86_64.sh \
-  && ./cmake-4.1.1-linux-x86_64.sh --prefix=/usr/local --exclude-sub-dir --skip-license \
-  && rm ./cmake-4.1.1-linux-x86_64.sh
+# Install odin
+RUN mkdir -p /opt/odin \
+  && cd /tmp \
+  && curl -LO "https://github.com/odin-lang/Odin/releases/download/dev-2025-12/odin-linux-amd64-dev-2025-12.tar.gz" \
+  && tar -xvf ./odin-linux-amd64-dev-2025-12.tar.gz --strip-components=1 -C /opt/odin
+
+ENV PATH="$PATH:/opt/odin"
